@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { motion } from "Motion/react";
+import { motion } from "motion/react";
 import SectionContainer from "@/app/components/container/section-container";
 
 const AboutSection = () => {
