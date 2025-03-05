@@ -3,7 +3,7 @@ const SectionContainer = ({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) => {
   return (
     <div
