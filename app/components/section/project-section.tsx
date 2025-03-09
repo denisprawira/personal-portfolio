@@ -54,7 +54,7 @@ const ProjectSection = () => {
       <motion.div
         className={`flex flex-col items-start flex-[1_1_auto] min-w-0 sm:mr-12  h-full gap-6`}
       >
-        <motion.p className="text-5xl yeseva-font">{`Project`}</motion.p>
+        <motion.p className="text-5xl yeseva-font">{`PROJECTS`}</motion.p>
         <Separator />
         <motion.p className="text-wrap">
           {`Take a look at my projects, where aesthetics and functionality come
@@ -66,7 +66,7 @@ const ProjectSection = () => {
         </motion.p>
       </motion.div>
       <motion.div
-        className="relative   border gap-0.5 border-gray-900 bg-gray-900 min-h-full h-full max-h-full w-full flex-[3_1_auto] min-w-[60%]"
+        className="relative   min-h-full h-full max-h-full w-full flex-[3_1_auto] min-w-[60%]"
         style={{
           display: "grid",
           gridTemplateRows: getRowSizes(),
@@ -90,7 +90,7 @@ const ProjectSection = () => {
                 setHovered(null);
                 setHoveredItem(undefined);
               }}
-              className="p-2 bg-stone-950 h-full flex justify-center items-center relative"
+              className="p-2  h-full flex justify-center items-center relative border border-stone-900"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
