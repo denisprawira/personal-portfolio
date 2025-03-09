@@ -66,7 +66,7 @@ export default function HeroSection() {
   const { width } = useScreenSize();
 
   return (
-    <SectionContainer className="space-y-4 flex flex-col bg-gray-950">
+    <SectionContainer className="space-y-4 flex flex-col bg-stone-950">
       <div className="space-y-4 flex-1 ">
         <div className="space-y-2 sm:space-y-0">
           <p>{`Hi, I'M DENIS PRAWIRA`}</p>
