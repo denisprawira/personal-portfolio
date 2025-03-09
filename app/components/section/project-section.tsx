@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { Separator } from "@/components/ui/separator";
 // import CornerButton from "/corner-button.svg";
 
 const ProjectSection = () => {
@@ -49,9 +50,23 @@ const ProjectSection = () => {
   };
 
   return (
-    <SectionContainer className="flex items-center justify-center">
+    <SectionContainer className="flex items-center justify-center flex-col sm:flex-row">
       <motion.div
-        className="relative   border gap-0.5 border-gray-900 bg-gray-900 min-h-full h-full max-h-full w-full"
+        className={`flex flex-col items-start flex-[1_1_auto] min-w-0 sm:mr-12  h-full gap-6`}
+      >
+        <motion.p className="text-5xl yeseva-font">{`Project`}</motion.p>
+        <Separator />
+        <motion.p className="text-wrap">
+          {`Take a look at my projects, where aesthetics and functionality come
+          together. My approach combines design thinking, front-end
+          technologies, and user-centered principles to create meaningful
+          experiences. From concept to execution, I aim to develop interfaces
+          that are not only visually stunning but also highly intuitive and
+          responsive`}
+        </motion.p>
+      </motion.div>
+      <motion.div
+        className="relative   border gap-0.5 border-gray-900 bg-gray-900 min-h-full h-full max-h-full w-full flex-[3_1_auto] min-w-[60%]"
         style={{
           display: "grid",
           gridTemplateRows: getRowSizes(),

@@ -11,12 +11,14 @@
     "commit": "cz"
   },
   "dependencies": {
+    "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.10",
     "next": "15.1.4",
+    "personal-portfolio": "link:",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "sass": "^1.85.0",
