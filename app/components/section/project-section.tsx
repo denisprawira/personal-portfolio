@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
+// import CornerButton from "/corner-button.svg";
 
 const ProjectSection = () => {
   const [hoverSize] = useState(6);
@@ -77,18 +78,36 @@ const ProjectSection = () => {
               className="p-2 bg-stone-950 h-full flex justify-center items-center relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
             >
               <motion.div
                 className={cn(
-                  "absolute w-full h-full bg-black/40 transition-all duration-700 cursor-pointer flex justify-center items-center z-20",
+                  "absolute w-full h-full bg-black/80 transition-all duration-500 cursor-pointer flex justify-center items-center z-20",
                   hoveredItem === index ? "opacity-100" : "opacity-0"
                 )}
               >
-                <p className="text-2xl text-white font-bold z-30 transition-all">{`${item.id}fdfdf`}</p>
+                <div className="absolute right-3 top-3  flex justify-center items-center h-fit w-fit transition-all duration-300">
+                  <img src={"/corner-button.svg"} className=" w-20 h-fit  " />
+                  <p
+                    className={`text-orange-600 absolute rotate-45 translate-x-2 -translate-y-1  yeseva-font text-lg`}
+                  >{`More`}</p>
+                </div>
+                <motion.p
+                  className="relative text-2xl duration-200  text-white font-bold z-30 transition-all yeseva-font before:content-[''] before:absolute before:inset-0 before:bg-white/20 before:scale-x-0 before:origin-left before:transition-transform before:duration-300 hover:before:scale-x-100"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={
+                    hoveredItem === index
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 20 }
+                  }
+                >
+                  {`${item.title}`}
+                </motion.p>
               </motion.div>
               <Image
-                src={item.corner}
+                src={item.image}
+                width={100}
+                height={100}
                 alt=""
                 className="w-full h-[6rem]  object-cover"
               />

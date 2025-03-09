@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "static.cdn-luma.com",
+      },
+      {
+        protocol: "https",
         hostname: "media.istockphoto.com",
       },
     ],
