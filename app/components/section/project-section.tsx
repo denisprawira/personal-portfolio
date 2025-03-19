@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import useWindowSize from "@/app/utils/hooks/use-window-size";
 import useGridPosition from "@/app/utils/hooks/use-grid-position";
 import { Breakpoints } from "@/app/utils/breakpoints";
+import { Squares } from "@/app/components/common/background/box-square-background";
 
 const ProjectSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>();
@@ -48,9 +49,17 @@ const ProjectSection = () => {
   return (
     <SectionContainer
       id="projects"
-      className="flex flex-col items-center justify-center  gap-8 "
+      className="relative flex flex-col items-center justify-center  gap-8 "
     >
-      <motion.div className={`flex flex-col sm:flex-row w-full gap-4`}>
+      <Squares
+        className="absolute h-full w-full left-0 top-0 "
+        direction="diagonal"
+        speed={0.3}
+        squareSize={40}
+        borderColor="#333"
+        hoverFillColor="#222"
+      />
+      <motion.div className={`flex flex-col sm:flex-row w-full gap-4 z-10`}>
         <motion.p className="text-5xl yeseva-font">{`PROJECTS`}</motion.p>
         <Separator
           orientation={width > Breakpoints.SM ? "vertical" : "horizontal"}

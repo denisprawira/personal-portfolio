@@ -24,6 +24,7 @@ function useGridPosition(
     const col = index % numCols;
     const numRows = Math.ceil(length / numCols) as number;
     return { row, col, numRows, numCols };
+    //eslint-disable-next-line
   }, [index, numCols]);
 }
 

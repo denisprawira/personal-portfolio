@@ -89,7 +89,7 @@ export default function HeroSection() {
       <Squares
         className="absolute h-full w-full left-0 top-0 "
         direction="diagonal"
-        speed={0.5}
+        speed={0.3}
         squareSize={40}
         borderColor="#333"
         hoverFillColor="#222"
@@ -97,7 +97,7 @@ export default function HeroSection() {
       <div className="space-y-4  h-fit relative ">
         <div className="space-y-2 sm:space-y-0">
           <p>{`Hi, I'M DENIS PRAWIRA`}</p>
-          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl yeseva-font space-y-2 sm:space-y-0">
+          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl yeseva-font space-y-2 sm:space-y-0 flex flex-col">
             <TextShimmer>DESIGNING & CRAFTING</TextShimmer>
             <TextShimmer className="ml-2">• DIGITAL EXPERIENCES</TextShimmer>
           </div>
