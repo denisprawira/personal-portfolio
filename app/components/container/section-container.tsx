@@ -9,7 +9,7 @@ const SectionContainer = ({
   return (
     <div
       {...rest}
-      className={`px-12 py-20 sm:p-[5rem] min-h-full min-w-full h-full ${className}`}
+      className={`px-12 py-20  min-h-full min-w-full h-full ${className}`}
     >
       {children}
     </div>

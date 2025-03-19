@@ -18,6 +18,7 @@
     "lucide-react": "^0.475.0",
     "motion": "^12.4.10",
     "next": "15.1.4",
+    "next-themes": "^0.4.6",
     "personal-portfolio": "link:",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

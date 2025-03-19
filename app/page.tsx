@@ -1,3 +1,4 @@
+import AboutSection from "@/app/components/section/about-section";
 import HeroSection from "@/app/components/section/hero-section";
 import ProjectSection from "@/app/components/section/project-section";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <div className="w-full h-full">
       <HeroSection />
       <ProjectSection />
+      <AboutSection />
     </div>
   );
 }
