@@ -15,7 +15,7 @@ const ProjectSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>();
 
   const [hoveredItem, setHoveredItem] = useState<number>();
-  const { width } = useWindowSize(); // Get window width
+  const { width } = useWindowSize();
   const { row, col, numRows, numCols } = useGridPosition(
     hoveredIndex,
     width,

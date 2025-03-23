@@ -28,6 +28,7 @@ const AboutSection = () => {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
+    //eslint-disable-next-line
   }, []);
 
   const randomRotateY = () => {
