@@ -1,8 +1,10 @@
+"use client";
 import { Squares } from "@/app/components/common/background/box-square-background";
 import { EmptyState } from "@/app/components/common/input-file/emtpy-state";
 
 import { TextShimmer } from "@/app/components/common/text/text-shimmer";
 import SectionContainer from "@/app/components/container/section-container";
+import { TextGradientScroll } from "@/app/components/text/text-gradient-scroll";
 import { Breakpoints } from "@/app/utils/breakpoints";
 import useWindowSize from "@/app/utils/hooks/use-window-size";
 import { Button } from "@/components/ui/button";
@@ -36,14 +38,23 @@ const ContactSection = () => {
         borderColor="#333"
         hoverFillColor="#222"
       />
-      <motion.div className={`flex flex-col sm:flex-row w-full gap-4 z-10`}>
+      <motion.div
+        className={`flex h-fit flex-col sm:flex-row w-full gap-4 z-10 items-center `}
+      >
         <TextShimmer className="text-5xl yeseva-font">{`Get In Touch`}</TextShimmer>
         <Separator
           orientation={width > Breakpoints.SM ? "vertical" : "horizontal"}
+          className="hidden sm:block"
         />
-        <motion.p className="text-wrap max-w-sm">{`Get in touch with us! Whether you have a question, feedback, or need assistance, we're here to help`}</motion.p>
+        <div className="flex flex-wrap w-full sm:w-[50%]">
+          <TextGradientScroll text="Get in touch with us! Whether you have a question, feedback, or need assistance, we're here to help" />
+        </div>
+        <Separator
+          orientation={width > Breakpoints.SM ? "vertical" : "horizontal"}
+          className="visible sm:hidden"
+        />
       </motion.div>
-      <div className="w-full h-full space-y-4 z-10">
+      <div className="w-full flex-1 h-full space-y-4 z-10">
         <Form {...form}>
           <FormField
             name="..."
@@ -102,7 +113,7 @@ const ContactSection = () => {
           />
         </Form>
         <EmptyState
-          className="bg-black/50 hover:bg-black/40 w-full min-w-[100%] cursor-pointer"
+          className="bg-black/50 hover:bg-black/40 w-full min-w-[100%] flex-1 cursor-pointer"
           title="Add Attachment"
           description="Upload or attach files to share "
           icons={[FileText, Link, Files]}

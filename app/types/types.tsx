@@ -1,7 +1,7 @@
-export type Projects = {
+export type Project = {
   id: string;
   title: string;
+  image: string;
   description: string;
-  url: string;
   stacks: string[];
 };
