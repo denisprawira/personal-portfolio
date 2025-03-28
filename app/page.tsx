@@ -1,9 +1,16 @@
+"use client";
+import AboutSection from "@/app/components/section/about-section";
+import ContactSection from "@/app/components/section/contact-section";
 import HeroSection from "@/app/components/section/hero-section";
+import ProjectSection from "@/app/components/section/project-section";
 
 export default function Home() {
   return (
-    <div className="w-full h-full">
+    <div className="relatice w-full h-full">
       <HeroSection />
+      <ProjectSection />
+      <AboutSection />
+      <ContactSection />
     </div>
   );
 }

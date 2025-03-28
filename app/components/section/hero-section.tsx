@@ -1,11 +1,13 @@
 "use client";
+import { Squares } from "@/app/components/common/background/box-square-background";
+import { TextShimmer } from "@/app/components/common/text/text-shimmer";
 import SectionContainer from "@/app/components/container/section-container";
 import { Breakpoints } from "@/app/utils/breakpoints";
 import { Badge } from "@/components/ui/badge";
 import useScreenSize from "@/hooks/ui/use-media-query";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface CircularTextProps {
   text: string;
@@ -65,16 +67,39 @@ const CircularText: React.FC<CircularTextProps> = ({ text, radius }) => {
 export default function HeroSection() {
   const { width } = useScreenSize();
 
+  const [titleNumber, setTitleNumber] = useState(0);
+  const titles = useMemo(
+    () => ["amazing", "new", "wonderful", "beautiful", "smart"],
+    []
+  );
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (titleNumber === titles.length - 1) {
+        setTitleNumber(0);
+      } else {
+        setTitleNumber(titleNumber + 1);
+      }
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [titleNumber, titles]);
+
   return (
-    <SectionContainer className="space-y-4 flex flex-col bg-gray-950">
-      <div className="space-y-4 flex-1 ">
+    <SectionContainer className="relative space-y-4 flex flex-col border-x-gray-200 justify-between ">
+      <Squares
+        className="absolute h-full w-full left-0 top-0 "
+        direction="diagonal"
+        speed={0.3}
+        squareSize={40}
+        borderColor="#333"
+        hoverFillColor="#222"
+      />
+      <div className="space-y-4  h-fit relative ">
         <div className="space-y-2 sm:space-y-0">
           <p>{`Hi, I'M DENIS PRAWIRA`}</p>
-          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl yeseva-font space-y-2 sm:space-y-0">
-            <p>DESIGNING & CRAFTING</p>
-            <p>
-              <span className="mx-3 ">•</span> DIGITAL EXPERIENCES
-            </p>
+          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl yeseva-font space-y-2 sm:space-y-0 flex flex-col">
+            <TextShimmer>DESIGNING & CRAFTING</TextShimmer>
+            <TextShimmer className="ml-2">• DIGITAL EXPERIENCES</TextShimmer>
           </div>
         </div>
         <Badge
@@ -88,7 +113,9 @@ export default function HeroSection() {
             <li className="group relative cursor-pointer w-fit">
               <div className="flex gap-2 items-center cursor-pointer group relative overflow-hidden">
                 <span className="hover:text-gray-300 transition-all">
-                  PROJECT
+                  <a href="#projects" className="">
+                    PROJECT
+                  </a>
                 </span>
                 <ArrowUpRight className=" opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" />
               </div>
