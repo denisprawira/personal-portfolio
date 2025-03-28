@@ -84,6 +84,8 @@ export default function HeroSection() {
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
 
+  if (width === null) return <>Loading...</>;
+
   return (
     <SectionContainer className="relative space-y-4 flex flex-col border-x-gray-200 justify-between ">
       <Squares

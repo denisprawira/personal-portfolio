@@ -25,8 +25,10 @@ import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
 
 const ContactSection = () => {
-  const { width } = useWindowSize();
+  const windowSize = useWindowSize();
   const form = useForm();
+
+  if (windowSize === null) return null;
 
   return (
     <SectionContainer className="relative flex flex-col gap-4">
@@ -43,14 +45,26 @@ const ContactSection = () => {
       >
         <TextShimmer className="text-5xl yeseva-font">{`Get In Touch`}</TextShimmer>
         <Separator
-          orientation={width > Breakpoints.SM ? "vertical" : "horizontal"}
+          orientation={
+            windowSize &&
+            windowSize?.width &&
+            windowSize?.width > Breakpoints.SM
+              ? "vertical"
+              : "horizontal"
+          }
           className="hidden sm:block"
         />
         <div className="flex flex-wrap w-full sm:w-[50%]">
           <TextGradientScroll text="Get in touch with us! Whether you have a question, feedback, or need assistance, we're here to help" />
         </div>
         <Separator
-          orientation={width > Breakpoints.SM ? "vertical" : "horizontal"}
+          orientation={
+            windowSize &&
+            windowSize?.width &&
+            windowSize?.width > Breakpoints.SM
+              ? "vertical"
+              : "horizontal"
+          }
           className="visible sm:hidden"
         />
       </motion.div>
