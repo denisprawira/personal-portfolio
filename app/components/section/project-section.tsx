@@ -39,7 +39,7 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
 
       <Image
         width={700}
-        height={250}
+        height={200}
         src={item.image}
         alt={item.title}
         className="w-full h-auto"

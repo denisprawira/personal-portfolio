@@ -60,9 +60,9 @@
     --chart-5: 340 75% 55%;
   }
 
-  * {
-    @apply border-border outline-ring/50;
-  }
+  // * {
+  //   @apply border-border outline-ring/50;
+  // }
 
   html,
   body {
@@ -75,7 +75,7 @@
     font-style: normal;
     transition: all 0.3s ease; /* Added duration and easing */
     scroll-behavior: smooth;
-    @apply bg-background text-foreground;
+    // @apply bg-background text-foreground;
   }
 
   .yeseva-font {
