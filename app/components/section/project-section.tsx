@@ -7,21 +7,29 @@ import useWindowSize from "@/app/utils/hooks/use-window-size";
 import { Breakpoints } from "@/app/utils/breakpoints";
 import { Squares } from "@/app/components/common/background/box-square-background";
 import { TextGradientScroll } from "@/app/components/text/text-gradient-scroll";
-import { collection, getDocs } from "firebase/firestore";
-// import { useRouter } from "next/navigation";
 import { TextShimmer } from "@/app/components/common/text/text-shimmer";
-import { db } from "@/app/firebase/config";
 import { useEffect, useState } from "react";
-import { Project } from "@/app/types/types";
+import { Menu, Project } from "@/app/types/types";
+import { useRouter } from "next/navigation";
+import useProjectQuery from "@/app/hooks/queries/project-queries";
+import { useGlobalState } from "@/app/hooks/store/global-state";
 
 const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
+  const router = useRouter();
+  const { setValue: setMenu } = useGlobalState<Menu[]>("PROJECT_MENU");
+
   return (
     <motion.div
       className="relative rounded-sm cursor-pointer h-fit group overflow-hidden"
-      initial={{ y: 40 }}
+      initial={{ y: 60, opacity: 0 }}
       whileHover={{ y: 0 }}
-      whileInView={{ y: 20 }}
+      whileInView={{ y: 20, opacity: 1 }}
+      viewport={{ amount: 1 }}
       transition={{ duration: 0.2, delay: index * 0.1 }}
+      onClick={() => {
+        setMenu(item.menu);
+        router.push(`/project/${item.id}`);
+      }}
     >
       <div className="absolute w-full h-full  bg-black/10 hover:bg-black/70 transition-all duration-300 " />
       <div className="absolute right-3 top-3 flex justify-center items-center h-fit w-fit transition-all duration-300 group-hover:opacity-100 opacity-0">
@@ -53,26 +61,14 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
 
 const ProjectSection = () => {
   const { width } = useWindowSize();
-  const [projects, setProjects] = useState<Project[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const { projectList } = useProjectQuery();
 
   useEffect(() => {
-    setIsClient(true); // Ensure rendering only happens on the client
+    setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const collectionRef = collection(db, "projects");
-      const querySnapshot = await getDocs(collectionRef);
-      const projectsData = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Project)
-      );
-      setProjects(projectsData.flat());
-    };
-    fetchProjects();
-  }, []);
-
-  if (!isClient) return null; // Prevent SSR errors by rendering nothing until client-side
+  if (!isClient) return null;
 
   return (
     <SectionContainer
@@ -98,7 +94,9 @@ const ProjectSection = () => {
       </motion.div>
       <motion.div className="h-fit sm:h-full w-full">
         <motion.div className="relative w-full h-fit sm:h-full min-h-full overflow-y-auto gap-2 gap-y-8 sm:gap-y-2 sm:gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((item, index) => (
+          {projectList.isLoading && <p>Loading...</p>}
+
+          {projectList.data?.map((item: Project, index) => (
             <AnimatedCard key={item.id} item={item} index={index} />
           ))}
         </motion.div>
