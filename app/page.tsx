@@ -1,12 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-const ThemeProvider = dynamic(
-  () => import("next-themes").then((mod) => mod.ThemeProvider),
-  {
-    ssr: false,
-  }
-);
-
 const AboutSection = dynamic(
   () => import("@/app/components/section/about-section"),
   {
@@ -34,18 +27,11 @@ const ProjectSection = dynamic(
 
 export default function Home() {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <div className="relatice w-full h-full">
-        <HeroSection />
-        <ProjectSection />
-        <AboutSection />
-        <ContactSection />
-      </div>
-    </ThemeProvider>
+    <div className="relatice w-full h-full bg-background">
+      <HeroSection />
+      <ProjectSection />
+      <AboutSection />
+      <ContactSection />
+    </div>
   );
 }
