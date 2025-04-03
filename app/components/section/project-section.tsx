@@ -17,14 +17,25 @@ import { useGlobalState } from "@/app/hooks/store/global-state";
 const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
   const router = useRouter();
   const { setValue: setMenu } = useGlobalState<IMenu[]>("PROJECT_MENU");
+  const { width } = useWindowSize();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (width >= Breakpoints.SM) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  }, [width]);
 
   return (
     <motion.div
+      key={index + isMobile.toString()}
       className="relative rounded-sm cursor-pointer h-fit group overflow-hidden"
       initial={{ y: 60, opacity: 0 }}
       whileHover={{ y: 0 }}
       whileInView={{ y: 20, opacity: 1 }}
-      viewport={{ amount: 1 }}
+      viewport={isMobile ? { amount: 0 } : { amount: 1 }}
       transition={{ duration: 0.2, delay: index * 0.1 }}
       onClick={() => {
         setMenu(item.menu);
@@ -93,7 +104,7 @@ const ProjectSection = () => {
         <TextGradientScroll text="showcases a collection of design and development projects, highlighting creativity and functionality" />
       </motion.div>
       <motion.div className="h-fit sm:h-full w-full">
-        <motion.div className="relative w-full h-fit sm:h-full min-h-full overflow-y-auto gap-2 gap-y-8 sm:gap-y-2 sm:gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div className="relative w-full h-fit sm:h-full min-h-full overflow-y-auto gap-2 gap-y-8 sm:gap-y-2 sm:gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
           {projectList.isLoading && <p>Loading...</p>}
 
           {projectList.data?.map((item: Project, index) => (
