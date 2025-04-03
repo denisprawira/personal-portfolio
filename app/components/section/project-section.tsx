@@ -9,14 +9,14 @@ import { Squares } from "@/app/components/common/background/box-square-backgroun
 import { TextGradientScroll } from "@/app/components/text/text-gradient-scroll";
 import { TextShimmer } from "@/app/components/common/text/text-shimmer";
 import { useEffect, useState } from "react";
-import { Menu, Project } from "@/app/types/types";
+import { IMenu, Project } from "@/app/types/types";
 import { useRouter } from "next/navigation";
 import useProjectQuery from "@/app/hooks/queries/project-queries";
 import { useGlobalState } from "@/app/hooks/store/global-state";
 
 const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
   const router = useRouter();
-  const { setValue: setMenu } = useGlobalState<Menu[]>("PROJECT_MENU");
+  const { setValue: setMenu } = useGlobalState<IMenu[]>("PROJECT_MENU");
 
   return (
     <motion.div
@@ -28,7 +28,7 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
       transition={{ duration: 0.2, delay: index * 0.1 }}
       onClick={() => {
         setMenu(item.menu);
-        router.push(`/project/${item.id}`);
+        router.push(`/pages/${item.id}`);
       }}
     >
       <div className="absolute w-full h-full  bg-black/10 hover:bg-black/70 transition-all duration-300 " />

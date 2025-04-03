@@ -4,14 +4,15 @@ export type Project = {
   image: string;
   description: string;
   stacks: string[];
-  menu: Menu[];
+  menu: IMenu[];
 };
 
-export type Menu = {
+export interface IMenu {
   id: string;
   title: string;
   description: string;
-};
+  icon: string;
+}
 
 export interface IMG {
   caption: string;
@@ -24,4 +25,7 @@ export interface IProject {
   title: string;
 }
 
-export type IProjectDetailData = IProject & { contents: IProject[] };
+export type IProjectDetailData = IProject & {
+  contents: IProject[];
+  stacks: string[];
+};
