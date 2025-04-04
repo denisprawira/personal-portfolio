@@ -15,7 +15,15 @@ import useProjectQuery from "@/app/hooks/queries/project-queries";
 import { useGlobalState } from "@/app/hooks/store/global-state";
 import { cn } from "@/lib/utils";
 
-const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
+const AnimatedCard = ({
+  item,
+  index,
+  isAnimated,
+}: {
+  item: Project;
+  index: number;
+  isAnimated: boolean;
+}) => {
   const router = useRouter();
   const { setValue: setMenu } = useGlobalState<IMenu[]>("PROJECT_MENU");
   const { width } = useWindowSize();
@@ -33,9 +41,9 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
     <motion.div
       key={index + isMobile.toString()}
       className="relative rounded-sm cursor-pointer h-fit group overflow-hidden"
-      initial={{ y: 60, opacity: 0 }}
+      initial={{ y: 60, opacity: 0, filter: "blur(5px)" }}
       whileHover={{ y: 0 }}
-      whileInView={{ y: 20, opacity: 1 }}
+      animate={isAnimated ? { y: 20, opacity: 1, filter: "blur(0px)" } : {}}
       viewport={isMobile ? { amount: 0 } : { amount: 1 }}
       transition={{ duration: 0.2, delay: index * 0.1 }}
       onClick={() => {
@@ -43,7 +51,7 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
         router.push(`/pages/${item.id}`);
       }}
     >
-      <div className="absolute w-full h-full  bg-black/10 hover:bg-black/70 transition-all duration-300 " />
+      <div className="absolute w-full h-full bg-black/10 hover:bg-black/70 hover:backdrop-blur-sm transition-all duration-300" />
       <div className="absolute right-3 top-3 flex justify-center items-center h-fit w-fit transition-all duration-300 group-hover:opacity-100 opacity-0">
         <Image
           height={100}
@@ -56,7 +64,6 @@ const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
           More
         </p>
       </div>
-
       <Image
         width={700}
         height={200}
@@ -75,6 +82,7 @@ const ProjectSection = () => {
   const { width } = useWindowSize();
   const [isClient, setIsClient] = useState(false);
   const { projectList } = useProjectQuery();
+  const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -85,10 +93,17 @@ const ProjectSection = () => {
   return (
     <SectionContainer
       id="projects"
+      viewport={{ amount: 0.85 }}
+      onViewportEnter={() => {
+        setIsAnimated(true);
+      }}
+      onViewportLeave={() => {
+        setIsAnimated(false);
+      }}
       className={cn(
         "relative flex flex-col items-center justify-center gap-8 ",
         "snap-start snap-always ",
-        "transition-[scroll] duration-1500 ease-in"
+        "transition-[scroll] duration-1500 ease-in "
       )}
     >
       <Squares
@@ -99,7 +114,12 @@ const ProjectSection = () => {
         borderColor="#333"
         hoverFillColor="#222"
       />
-      <motion.div className="flex flex-col sm:flex-row w-full gap-4 z-10 items-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
+        animate={isAnimated ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+        transition={{ duration: 0.3 }}
+        className="flex flex-col sm:flex-row w-full gap-4 z-10 items-center "
+      >
         <TextShimmer className="text-5xl yeseva-font">PROJECTS</TextShimmer>
         <Separator
           orientation={
@@ -108,12 +128,17 @@ const ProjectSection = () => {
         />
         <TextGradientScroll text="showcases a collection of design and development projects, highlighting creativity and functionality" />
       </motion.div>
-      <motion.div className="h-fit sm:h-full w-full">
-        <motion.div className="relative w-full h-fit sm:h-full min-h-full overflow-y-auto gap-2 gap-y-8 sm:gap-y-2 sm:gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+      <motion.div className=" sm:h-full w-full h-full ">
+        <motion.div className="relative w-full h-fit  sm:h-full  overflow-y-auto gap-2 gap-y-8 sm:gap-y-2 sm:gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
           {projectList.isLoading && <p>Loading...</p>}
 
           {projectList.data?.map((item: Project, index) => (
-            <AnimatedCard key={item.id} item={item} index={index} />
+            <AnimatedCard
+              key={item.id}
+              item={item}
+              index={index}
+              isAnimated={isAnimated}
+            />
           ))}
         </motion.div>
       </motion.div>
