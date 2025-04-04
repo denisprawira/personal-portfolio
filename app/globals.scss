@@ -75,6 +75,7 @@
     font-style: normal;
     transition: all 0.3s ease; /* Added duration and easing */
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
     // @apply bg-background text-foreground;
   }
 
