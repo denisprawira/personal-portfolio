@@ -13,6 +13,7 @@ import { IMenu, Project } from "@/app/types/types";
 import { useRouter } from "next/navigation";
 import useProjectQuery from "@/app/hooks/queries/project-queries";
 import { useGlobalState } from "@/app/hooks/store/global-state";
+import { cn } from "@/lib/utils";
 
 const AnimatedCard = ({ item, index }: { item: Project; index: number }) => {
   const router = useRouter();
@@ -84,7 +85,11 @@ const ProjectSection = () => {
   return (
     <SectionContainer
       id="projects"
-      className="relative flex flex-col items-center justify-center gap-8"
+      className={cn(
+        "relative flex flex-col items-center justify-center gap-8 ",
+        "snap-start snap-always ",
+        "transition-[scroll] duration-1500 ease-in"
+      )}
     >
       <Squares
         className="absolute h-full w-full left-0 top-0"

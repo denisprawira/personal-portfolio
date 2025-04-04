@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 import { Files, FileText, Link } from "lucide-react";
 import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
@@ -31,7 +32,14 @@ const ContactSection = () => {
   if (windowSize === null) return null;
 
   return (
-    <SectionContainer className="relative flex flex-col gap-4">
+    <SectionContainer
+      id={"contact"}
+      className={cn(
+        "relative flex flex-col gap-4",
+        "snap-start snap-always ",
+        "transition-[scroll] duration-1500 ease-in"
+      )}
+    >
       <Squares
         className="absolute h-full w-full left-0 top-0 "
         direction="diagonal"
